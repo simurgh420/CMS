@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/TypeScript-black?logo=typescript" alt="TypeScript">
   <img src="https://img.shields.io/badge/Tailwind_CSS-black?logo=tailwindcss" alt="Tailwind CSS">
 </p>
-![پیش‌نمایش داشبورد](./public/dashboard-preview.png)
+
 
 
 
