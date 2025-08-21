@@ -9,7 +9,7 @@
 </p>
 
 
-
+[![dashboard-preview.png](https://i.postimg.cc/g2gtMnzn/dashboard-preview.png)](https://postimg.cc/v46vT86s)
 
 <p align="center">
   یک داشبورد ادمین زیبا و واکنش‌گرا با React، TypeScript و Tailwind CSS. این پروژه شامل قابلیت‌های کامل مدیریت کاربران، محصولات، تحلیل‌ها و... به همراه پشتیبانی از حالت تاریک است.
