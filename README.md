@@ -198,7 +198,7 @@ If you have any questions or need help, please open an issue on GitHub.
 
 ---
 
-Made with ❤️ by [simurgh420)
+Made with ❤️ by [https://github.com/simurgh420)
 
 ---
 
