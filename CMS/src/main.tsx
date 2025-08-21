@@ -8,9 +8,10 @@ import { ThemeProvider } from './components/ThemeProvider'
 const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById('root')!).render(
+  <ThemeProvider>
   <StrictMode>
-    <ThemeProvider>
+
       <RouterProvider router={router}/>
+    </StrictMode>,
     </ThemeProvider>
-  </StrictMode>,
 )
