@@ -38,4 +38,20 @@ export interface Users {
         
 }
 
+
+export interface Orders { 
+    name: string
+    email: string
+    amount: string
+    avatar:string
+}
+
+export interface Mails { 
+    id: string
+    sender: string
+    subject: string
+    body: string
+    read:boolean
+}
+
   

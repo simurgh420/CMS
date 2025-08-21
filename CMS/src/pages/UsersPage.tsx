@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input"
-
+import { toast } from "sonner";
 import {
   Table,
   TableBody,
@@ -62,6 +62,7 @@ export default function UsersPage() {
       setUsers(currentUsers => currentUsers.filter(user => user.id !== userToDelete))
       setUserToDelete(null)
       setIsDeleteDialogOpen(false)
+      toast.success("User has been deleted successfully.");
     }
 
   };
@@ -70,8 +71,8 @@ export default function UsersPage() {
     setIsDeleteDialogOpen(true)
   }
   return (
-    <div className="bg-white rounded-lg shadow-md">
-      <div className="px-6 py-4 border-b flex justify-between items-center">
+    <div className="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-700">
+      <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
         <div className="w-full max-w-sm">
           <Input
             placeholder="Search by name or email..."
@@ -88,19 +89,19 @@ export default function UsersPage() {
       </div>
       <Table>
         <TableHeader>
-        <TableRow>
-            <TableHead>User</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Transaction</TableHead>
-            <TableHead>Action</TableHead>
+        <TableRow className="border-slate-200 dark:border-slate-700">
+            <TableHead className="text-slate-900 dark:text-slate-100">User</TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">Email</TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">Status</TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">Transaction</TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">Action</TableHead>
             </TableRow>
         </TableHeader>
       
         <TableBody>
           {currentUsers.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium">
+            <TableRow key={user.id} className="border-slate-200 dark:border-slate-700">
+              <TableCell className="font-medium text-slate-900 dark:text-slate-100">
                 <div className="flex items-center gap-2">
                   <Avatar className="w-8 h-8">
                     <AvatarImage src={user.avatar} />
@@ -109,32 +110,32 @@ export default function UsersPage() {
                   <span>{ user.name}</span>
                 </div>
               </TableCell>
-              <TableCell className="text-slate-500">{user.email}</TableCell>
+              <TableCell className="text-slate-500 dark:text-slate-400">{user.email}</TableCell>
               <TableCell>
                 <Badge variant={statusStyles[user.status].variant}> 
                 {statusStyles[user.status].text}
                 </Badge>
               </TableCell>
-              <TableCell className="text-slate-500">{user.transaction} </TableCell>
+              <TableCell className="text-slate-500 dark:text-slate-400">{user.transaction} </TableCell>
               <TableCell>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
+                    <Button variant="ghost" className="h-8 w-8 p-0 hover:bg-slate-100 dark:hover:bg-slate-800">
                       <span className="sr-only">Open menu</span>
-                      <MoreHorizontal className="h-4 w-4" />
+                      <MoreHorizontal className="h-4 w-4 text-slate-600 dark:text-slate-300" />
                   </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                  <DropdownMenuContent align="end" className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
+                    <DropdownMenuLabel className="text-slate-900 dark:text-slate-100">Actions</DropdownMenuLabel>
                 
-                    <DropdownMenuItem asChild >
+                    <DropdownMenuItem asChild className="text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
                     <Link to={`/users/${user.id}/edit`}>
                       <Edit className="mr-2 h-4 w-4" />
                         <span>Edit</span>
                         </Link>
                     </DropdownMenuItem>
                 
-                    <DropdownMenuItem className="text-red-500 focus:text-red-800"
+                    <DropdownMenuItem className="text-red-500 focus:text-red-800 dark:text-red-400 dark:focus:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20"
                       onSelect={()=>openDeleteDialog(user.id)}>
                     <Trash2 className="mr-2 h-4 w-4" />
                     <span>Delete</span>
@@ -147,8 +148,8 @@ export default function UsersPage() {
         </TableBody>
   
       </Table>
-      <div className="px-6 py-6 border-t flex justify-end items-center gap-4">
-        <span  className="text-sm text-slate-500">
+      <div className="px-6 py-6 border-t border-slate-200 dark:border-slate-700 flex justify-end items-center gap-4">
+        <span  className="text-sm text-slate-500 dark:text-slate-400">
           Page {currentPage} of {totalPages}
         </span >
         <div className="flex gap-2">
@@ -157,6 +158,7 @@ export default function UsersPage() {
             size='sm'
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
+            className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
                 Previous
           </Button>
@@ -164,24 +166,25 @@ export default function UsersPage() {
           variant="outline"
           size="sm"
           onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-          disabled={currentPage === totalPages}>
+          disabled={currentPage === totalPages}
+          className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
               Next  
           </Button>
         </div>
 
       </div>
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogTitle className="text-slate-900 dark:text-slate-100">Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription className="text-slate-600 dark:text-slate-400">
           This action cannot be undone. This will permanently delete the user account
           and remove their data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteUser}> Continue</AlertDialogAction>
+          <AlertDialogCancel className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDeleteUser} className="bg-red-500 hover:bg-red-600 text-white"> Continue</AlertDialogAction>
           </AlertDialogFooter>
           </AlertDialogContent>
             </AlertDialog>

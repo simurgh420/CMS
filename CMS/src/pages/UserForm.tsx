@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -47,10 +47,10 @@ export default function UserForm({initialData }: UserFormProps) {
   function onSubmit(values:UserFormData) { 
     if (initialData) {
       console.log("Form Updated!", values);
-      alert("User updated successfully!");
+      toast.success("User updated successfully!");
     } else { 
       console.log("Form Submitted!", values);
-           alert("User created successfully!");
+      toast.success("User created successfully!");
            form.reset();
     }
   }

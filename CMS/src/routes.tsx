@@ -10,6 +10,8 @@ import NewUserPage from "./pages/NewUserPage";
 import EditUserPage from "./pages/EditUserPage";
 import EditProductPage from "./pages/EditProductPage";
 import { ProductForm } from "./pages/ProductForm";
+import MailPage from "./pages/MailPage";
+import FeedbackPage from "./pages/FeedbackPage";
 
 
 export const routes: RouteObject[] = [
@@ -52,9 +54,16 @@ export const routes: RouteObject[] = [
                 path: "products/new",
                 element:<ProductForm/>
             },
+            {
+                path: "mail",
+                element:<MailPage/>
+            },
+            {
+                path: "feedback",
+                element:<FeedbackPage/>
+            },
        
         ]
-        
     },
     {
         path: '*',
