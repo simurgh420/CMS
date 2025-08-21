@@ -44,7 +44,6 @@ const statusStyles: { [key: string]: { variant: 'default' | 'secondary' | 'destr
 };
 export default function UsersPage() {
   const [users, setUsers] = useState<Users[]>(usersData);
-  
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -60,15 +59,16 @@ export default function UsersPage() {
   const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
   const handleDeleteUser = () => {
     if (userToDelete) {
-        setUsers(currentUsers => currentUsers.filter(user => user.id !== userToDelete));
-        setUserToDelete(null); // ریست کردن state
-        setIsDeleteDialogOpen(false); // بستن مودال
+      setUsers(currentUsers => currentUsers.filter(user => user.id !== userToDelete))
+      setUserToDelete(null)
+      setIsDeleteDialogOpen(false)
     }
+
   };
-  const openDeleteDialog = (userId: string) => {
-    setUserToDelete(userId);
-    setIsDeleteDialogOpen(true);
-  };
+  const openDeleteDialog = (userId:string) => { 
+    setUserToDelete(userId)
+    setIsDeleteDialogOpen(true)
+  }
   return (
     <div className="bg-white rounded-lg shadow-md">
       <div className="px-6 py-4 border-b flex justify-between items-center">
@@ -172,19 +172,19 @@ export default function UsersPage() {
       </div>
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete the user account
-              and remove their data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteUser}>Continue</AlertDialogAction>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+          This action cannot be undone. This will permanently delete the user account
+          and remove their data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDeleteUser}> Continue</AlertDialogAction>
           </AlertDialogFooter>
-        </AlertDialogContent>
-        </AlertDialog>
+          </AlertDialogContent>
+            </AlertDialog>
     </div>
   )
 }

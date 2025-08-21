@@ -52,17 +52,15 @@ export default function ProductsPage() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE)
-  const handleDeleteProduct = () => {
-    if (productToDelete) {
-        setProducts(currentProducts => currentProducts.filter(p => p.id !== productToDelete));
-        setProductToDelete(null);
-        setIsDeleteDialogOpen(false);
-    }
-  };
-  const openDeleteDialog = (productId: string) => {
-    setProductToDelete(productId);
-    setIsDeleteDialogOpen(true);
-  };
+  const handleDeleteProduct = () => { 
+    setProducts(currentProducts => currentProducts.filter(p => p.id !== productToDelete))
+    setProductToDelete(null)
+    setIsDeleteDialogOpen(false)
+  }
+  const openDeleteDialog = (productId:string) => { 
+    setProductToDelete(productId)
+    setIsDeleteDialogOpen(true)
+  }
   return (
     <div className='bg-white rounded-lg shadow-md'>
       <div className='px-6 py-4  border-b flex justify-between items-center gap-4 '>
@@ -72,18 +70,21 @@ export default function ProductsPage() {
             value={searchTerm}
             onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1) }}
           />
-             </div>
+        </div>
+        <Link to='/products/new'>
              <Button>Add New Product</Button>
+      </Link>
       </div>
       <Table>
         <TableHeader>
           <TableRow>
              <TableHead>Product Name</TableHead>
               <TableHead>Category</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Stock</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Action</TableHead>
+              <TableHead>Price</TableHead>
+              <TableHead>Stock</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Action</TableHead>
+
          </TableRow>
         </TableHeader>
         <TableBody>
@@ -134,21 +135,23 @@ export default function ProductsPage() {
         <Button variant='outline' onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))} disabled={ currentPage===totalPages}>Next</Button>
             </div>
       </div>
-
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>
+            Are you sure?
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the product from your inventory.
+            This will permanently delete the product from your inventory.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteProduct}>Continue</AlertDialogAction>
+          <AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDeleteProduct}>Continue</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog>
-            </div>
+              </AlertDialog>
+    
+    </div>
+    
   )
 }

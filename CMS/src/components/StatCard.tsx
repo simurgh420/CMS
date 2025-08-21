@@ -1,5 +1,5 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";    
+import {Card, CardContent,  CardHeader, CardTitle} from "@/components/ui/card";
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 interface StatCardProps { 
@@ -16,8 +16,10 @@ const StatCard = ({ title, value, change, changeType, description }: StatCardPro
     const ChangeIcon =  isIncrease ? ArrowUpRight :  ArrowDownRight
     return (  
         <Card>
+
             <CardHeader>
                 <CardTitle className="text-base font-medium text-slate-500">{ title}</CardTitle>
+
             </CardHeader>
             <CardContent>
                 <div className="text-3xl font-bold"> {value} </div>

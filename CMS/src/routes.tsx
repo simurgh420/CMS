@@ -9,6 +9,7 @@ import ProductsPage from "./pages/ProductsPage";
 import NewUserPage from "./pages/NewUserPage";
 import EditUserPage from "./pages/EditUserPage";
 import EditProductPage from "./pages/EditProductPage";
+import { ProductForm } from "./pages/ProductForm";
 
 
 export const routes: RouteObject[] = [
@@ -46,6 +47,10 @@ export const routes: RouteObject[] = [
             {
                 path: "products/:productId/edit",
                 element:<EditProductPage/>
+            },
+            {
+                path: "products/new",
+                element:<ProductForm/>
             },
        
         ]

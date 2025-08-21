@@ -15,7 +15,7 @@ export interface Product {
     name: string;
     category: string;
     price: string ; 
-    stock: string;
+    stock: number;
     status: "In Stock" | "Low Stock" | "Out of Stock";
 }
   

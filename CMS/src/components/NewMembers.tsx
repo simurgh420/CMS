@@ -13,6 +13,7 @@ export default function NewMembers() {
                   newMembers.map((member) => (
                       <div key={member.name} className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
+                              
                               <Avatar>
                                   <AvatarImage src={member.avatar} />
                                   <AvatarFallback>{ member.name.substring(0,2)}</AvatarFallback>
