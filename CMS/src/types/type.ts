@@ -1,0 +1,41 @@
+
+export interface  AnalyticsPoint { 
+    name: string;
+    sales: number;
+}
+
+export interface NewMembers { 
+    name: string;
+    title: string;
+    avatar:string
+    
+}
+export interface Product {
+    id: string;
+    name: string;
+    category: string;
+    price: string ; 
+    stock: string;
+    status: "In Stock" | "Low Stock" | "Out of Stock";
+}
+  
+
+export interface Transaction { 
+    customer: string;
+    avatar: string;
+    date: string;
+    amount: string
+    status:string
+}
+export interface Users { 
+ 
+        id: string;
+        name: string
+        email: string
+        avatar: string
+        status: string
+        transaction:string
+        
+}
+
+  
