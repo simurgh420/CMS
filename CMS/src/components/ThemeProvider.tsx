@@ -11,7 +11,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const prefersDark = window.matchMedia(
       '(prefers-color-scheme: dark)',
     ).matches;
-    // برای اولیت قرار دادن تم سیستم عامل نسبت به تم مرورگر
+    // برای اولیت قرار دادن تمی که کاربر در لوکال استورج قرار داده نسبت به تم سیستم عامنل 
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
     setTheme(initialTheme);
     // برای کار با تلوین سی اس اس اضافه یا حذف کردن کلاس دارک
@@ -21,7 +21,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       document.documentElement.classList.remove('dark');
     }
   }, []);
-
+// برای تعغیر تم با زدن دکمه عوض شه 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
