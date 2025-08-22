@@ -23,11 +23,9 @@ import {
 const formSchema = z.object({
   name: z.string().min(3, 'Product name must be at least 3 characters.'),
   category: z.string().nonempty('Category is required.'),
-  price: z
-    .string()
-    .refine((val) => !isNaN(parseFloat(val)), {
-      message: 'Price must be a number.',
-    }),
+  price: z.string().refine((val) => !isNaN(parseFloat(val)), {
+    message: 'Price must be a number.',
+  }),
   stock: z.number().min(0, { message: 'Stock must be a number.' }),
   status: z.enum(['In Stock', 'Low Stock', 'Out of Stock']),
 });
@@ -64,12 +62,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              {' '}
-              <FormLabel>Product Name</FormLabel>{' '}
+              <FormLabel>Product Name</FormLabel>
               <FormControl>
                 <Input placeholder="e.g. Wireless Mouse" {...field} />
-              </FormControl>{' '}
-              <FormMessage />{' '}
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -78,12 +75,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
           name="category"
           render={({ field }) => (
             <FormItem>
-              {' '}
-              <FormLabel>Category</FormLabel>{' '}
+              <FormLabel>Category</FormLabel>
               <FormControl>
                 <Input placeholder="e.g. Electronics" {...field} />
-              </FormControl>{' '}
-              <FormMessage />{' '}
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -92,12 +88,11 @@ export default function ProductForm({ initialData }: ProductFormProps) {
           name="price"
           render={({ field }) => (
             <FormItem>
-              {' '}
-              <FormLabel>Price</FormLabel>{' '}
+              <FormLabel>Price</FormLabel>
               <FormControl>
                 <Input type="number" placeholder="e.g. 25.00" {...field} />
-              </FormControl>{' '}
-              <FormMessage />{' '}
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

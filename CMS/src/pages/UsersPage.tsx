@@ -4,9 +4,9 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input"
-import { toast } from "sonner";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
 import {
   Table,
   TableBody,
@@ -14,15 +14,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
-import { useState } from 'react'
-import { Link } from "react-router";
-import {users as usersData } from "@/data/users"
-import type { Users } from "@/types/type";
+} from '@/components/ui/table';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { MoreHorizontal, Edit, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router';
+import { users as usersData } from '@/data/users';
+import type { Users } from '@/types/type';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,15 +32,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-
-} from "@/components/ui/alert-dialog";
-
+} from '@/components/ui/alert-dialog';
 
 // تعریف یک mapping برای رنگ و متن Badge ها
-const statusStyles: { [key: string]: { variant: 'default' | 'secondary' | 'destructive', text: string } } = {
-  'active': { variant: 'default', text: 'Active' },
-  'passive': { variant: 'secondary', text: 'Passive' },
-  'pending': { variant: 'destructive', text: 'Pending' }
+const statusStyles: {
+  [key: string]: {
+    variant: 'default' | 'secondary' | 'destructive';
+    text: string;
+  };
+} = {
+  active: { variant: 'default', text: 'Active' },
+  passive: { variant: 'secondary', text: 'Passive' },
+  pending: { variant: 'destructive', text: 'Pending' },
 };
 export default function UsersPage() {
   const [users, setUsers] = useState<Users[]>(usersData);
@@ -49,9 +52,10 @@ export default function UsersPage() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<string | null>(null);
   const ITEMS_PER_PAGE = 4; // تعداد آیتم‌ها در هر صفحه
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -59,17 +63,18 @@ export default function UsersPage() {
   const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
   const handleDeleteUser = () => {
     if (userToDelete) {
-      setUsers(currentUsers => currentUsers.filter(user => user.id !== userToDelete))
-      setUserToDelete(null)
-      setIsDeleteDialogOpen(false)
-      toast.success("User has been deleted successfully.");
+      setUsers((currentUsers) =>
+        currentUsers.filter((user) => user.id !== userToDelete),
+      );
+      setUserToDelete(null);
+      setIsDeleteDialogOpen(false);
+      toast.success('User has been deleted successfully.');
     }
-
   };
-  const openDeleteDialog = (userId:string) => { 
-    setUserToDelete(userId)
-    setIsDeleteDialogOpen(true)
-  }
+  const openDeleteDialog = (userId: string) => {
+    setUserToDelete(userId);
+    setIsDeleteDialogOpen(true);
+  };
   return (
     <div className="bg-white dark:bg-slate-900 rounded-lg shadow-md border border-slate-200 dark:border-slate-700">
       <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
@@ -89,105 +94,147 @@ export default function UsersPage() {
       </div>
       <Table>
         <TableHeader>
-        <TableRow className="border-slate-200 dark:border-slate-700">
-            <TableHead className="text-slate-900 dark:text-slate-100">User</TableHead>
-            <TableHead className="text-slate-900 dark:text-slate-100">Email</TableHead>
-            <TableHead className="text-slate-900 dark:text-slate-100">Status</TableHead>
-            <TableHead className="text-slate-900 dark:text-slate-100">Transaction</TableHead>
-            <TableHead className="text-slate-900 dark:text-slate-100">Action</TableHead>
-            </TableRow>
+          <TableRow className="border-slate-200 dark:border-slate-700">
+            <TableHead className="text-slate-900 dark:text-slate-100">
+              User
+            </TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">
+              Email
+            </TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">
+              Status
+            </TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">
+              Transaction
+            </TableHead>
+            <TableHead className="text-slate-900 dark:text-slate-100">
+              Action
+            </TableHead>
+          </TableRow>
         </TableHeader>
-      
+
         <TableBody>
           {currentUsers.map((user) => (
-            <TableRow key={user.id} className="border-slate-200 dark:border-slate-700">
+            <TableRow
+              key={user.id}
+              className="border-slate-200 dark:border-slate-700"
+            >
               <TableCell className="font-medium text-slate-900 dark:text-slate-100">
                 <div className="flex items-center gap-2">
                   <Avatar className="w-8 h-8">
                     <AvatarImage src={user.avatar} />
-                    <AvatarFallback>{ user.name.substring(0,2)}</AvatarFallback>
+                    <AvatarFallback>{user.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
-                  <span>{ user.name}</span>
+                  <span>{user.name}</span>
                 </div>
               </TableCell>
-              <TableCell className="text-slate-500 dark:text-slate-400">{user.email}</TableCell>
+              <TableCell className="text-slate-500 dark:text-slate-400">
+                {user.email}
+              </TableCell>
               <TableCell>
-                <Badge variant={statusStyles[user.status].variant}> 
-                {statusStyles[user.status].text}
+                <Badge variant={statusStyles[user.status].variant}>
+                  {statusStyles[user.status].text}
                 </Badge>
               </TableCell>
-              <TableCell className="text-slate-500 dark:text-slate-400">{user.transaction} </TableCell>
+              <TableCell className="text-slate-500 dark:text-slate-400">
+                {user.transaction}
+              </TableCell>
               <TableCell>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <Button
+                      variant="ghost"
+                      className="h-8 w-8 p-0 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    >
                       <span className="sr-only">Open menu</span>
                       <MoreHorizontal className="h-4 w-4 text-slate-600 dark:text-slate-300" />
-                  </Button>
+                    </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
-                    <DropdownMenuLabel className="text-slate-900 dark:text-slate-100">Actions</DropdownMenuLabel>
-                
-                    <DropdownMenuItem asChild className="text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <Link to={`/users/${user.id}/edit`}>
-                      <Edit className="mr-2 h-4 w-4" />
+                  <DropdownMenuContent
+                    align="end"
+                    className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                  >
+                    <DropdownMenuLabel className="text-slate-900 dark:text-slate-100">
+                      Actions
+                    </DropdownMenuLabel>
+
+                    <DropdownMenuItem
+                      asChild
+                      className="text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    >
+                      <Link to={`/users/${user.id}/edit`}>
+                        <Edit className="mr-2 h-4 w-4" />
                         <span>Edit</span>
-                        </Link>
+                      </Link>
                     </DropdownMenuItem>
-                
-                    <DropdownMenuItem className="text-red-500 focus:text-red-800 dark:text-red-400 dark:focus:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20"
-                      onSelect={()=>openDeleteDialog(user.id)}>
-                    <Trash2 className="mr-2 h-4 w-4" />
-                    <span>Delete</span>
-                    </DropdownMenuItem >
+
+                    <DropdownMenuItem
+                      className="text-red-500 focus:text-red-800 dark:text-red-400 dark:focus:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20"
+                      onSelect={() => openDeleteDialog(user.id)}
+                    >
+                      <Trash2 className="mr-2 h-4 w-4" />
+                      <span>Delete</span>
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
-              </DropdownMenu>
-             </TableCell>
-              </TableRow>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
           ))}
         </TableBody>
-  
       </Table>
       <div className="px-6 py-6 border-t border-slate-200 dark:border-slate-700 flex justify-end items-center gap-4">
-        <span  className="text-sm text-slate-500 dark:text-slate-400">
+        <span className="text-sm text-slate-500 dark:text-slate-400">
           Page {currentPage} of {totalPages}
-        </span >
+        </span>
         <div className="flex gap-2">
           <Button
-            variant='outline'
-            size='sm'
+            variant="outline"
+            size="sm"
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
             className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-                Previous
+            Previous
           </Button>
           <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-          disabled={currentPage === totalPages}
-          className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-              Next  
+            variant="outline"
+            size="sm"
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+          >
+            Next
           </Button>
         </div>
-
       </div>
-      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+      <AlertDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+      >
         <AlertDialogContent className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
-        <AlertDialogHeader>
-          <AlertDialogTitle className="text-slate-900 dark:text-slate-100">Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription className="text-slate-600 dark:text-slate-400">
-          This action cannot be undone. This will permanently delete the user account
-          and remove their data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteUser} className="bg-red-500 hover:bg-red-600 text-white"> Continue</AlertDialogAction>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-slate-900 dark:text-slate-100">
+              Are you absolutely sure?
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-600 dark:text-slate-400">
+              This action cannot be undone. This will permanently delete the
+              user account and remove their data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteUser}
+              className="bg-red-500 hover:bg-red-600 text-white"
+            >
+              {' '}
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
-          </AlertDialogContent>
-            </AlertDialog>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
-  )
+  );
 }
